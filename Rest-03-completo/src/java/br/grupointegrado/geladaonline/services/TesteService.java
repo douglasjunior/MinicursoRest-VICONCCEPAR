@@ -1,4 +1,4 @@
-package br.com.geladaonline.services;
+package br.grupointegrado.geladaonline.services;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,7 +12,7 @@ public class TesteService {
     }
 
     @GET
-    @Produces("text/plain;character-encoding=utf-8")
+    @Produces("text/plain")
     public String dizOla() {
         return "Olá, mundo REST!";
     }

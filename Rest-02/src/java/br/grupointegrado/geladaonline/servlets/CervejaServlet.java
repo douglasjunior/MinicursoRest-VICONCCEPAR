@@ -1,4 +1,4 @@
-package br.com.geladaonline.servlets;
+package br.grupointegrado.geladaonline.servlets;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -15,10 +15,14 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import br.com.geladaonline.model.Cerveja;
-import br.com.geladaonline.model.Estoque;
-import br.com.geladaonline.model.rest.Cervejas;
+import br.grupointegrado.geladaonline.model.Cerveja;
+import br.grupointegrado.geladaonline.model.Estoque;
+import br.grupointegrado.geladaonline.model.rest.Cervejas;
 
+/**
+ * Servlet responsável por responder solicitações na URL /cervejas/
+ *
+ */
 @WebServlet(value = "/cervejas/*")
 public class CervejaServlet extends HttpServlet {
 
@@ -66,11 +70,11 @@ public class CervejaServlet extends HttpServlet {
             try {
                 identificador = obtemIdentificador(req);
             } catch (RecursoSemIdentificadorException e) {
-                resp.sendError(400, e.getMessage()); //Manda um erro 400 - Bad Request
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage()); //Manda um erro 400 - Bad Request
             }
 
             if (identificador != null && estoque.recuperarCervejaPeloNome(identificador) != null) {
-                resp.sendError(409, "Já existe uma cerveja com esse nome");
+                resp.sendError(HttpServletResponse.SC_CONFLICT, "Já existe uma cerveja com esse nome");
                 return;
             }
 
@@ -84,7 +88,7 @@ public class CervejaServlet extends HttpServlet {
 
             escreveXML(req, resp);
         } catch (Exception e) {
-            resp.sendError(500, e.getMessage());
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 
@@ -130,7 +134,7 @@ public class CervejaServlet extends HttpServlet {
         Object objetoAEscrever = localizaObjetoASerEnviado(req);
 
         if (objetoAEscrever == null) {
-            resp.sendError(404);
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
@@ -139,7 +143,7 @@ public class CervejaServlet extends HttpServlet {
             Marshaller marshaller = context.createMarshaller();
             marshaller.marshal(objetoAEscrever, resp.getWriter());
         } catch (JAXBException e) {
-            resp.sendError(500);
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 

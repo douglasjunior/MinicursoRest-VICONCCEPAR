@@ -1,4 +1,4 @@
-package br.com.geladaonline.services;
+package br.grupointegrado.geladaonline.services;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,7 +17,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -25,19 +24,24 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 
-import br.com.geladaonline.model.Cerveja;
-import br.com.geladaonline.model.CervejaJaExisteException;
-import br.com.geladaonline.model.Estoque;
-import br.com.geladaonline.model.rest.Cervejas;
+import br.grupointegrado.geladaonline.model.Cerveja;
+import br.grupointegrado.geladaonline.model.CervejaJaExisteException;
+import br.grupointegrado.geladaonline.model.Estoque;
+import br.grupointegrado.geladaonline.model.rest.Cervejas;
 
 @Path("/cervejas")
 @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 @Produces({MediaType.TEXT_XML, MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public class CervejaService {
 
-    private static Estoque estoque = new Estoque();
+    private static Map<String, String> EXTENSOES;
 
-    private static final int TAMANHO_PAGINA = 1;
+    static {
+        EXTENSOES = new HashMap<>();
+        EXTENSOES.put("image/jpg", ".jpg");
+    }
+
+    private static Estoque estoque = new Estoque();
 
     @GET
     @Path("{nome}")
@@ -50,9 +54,9 @@ public class CervejaService {
     }
 
     @GET
-    public Cervejas listeTodasAsCervejas(@QueryParam("pagina") int pagina) {
+    public Cervejas listeTodasAsCervejas() {
 
-        List<Cerveja> cervejas = estoque.listarCervejas(pagina, TAMANHO_PAGINA);
+        List<Cerveja> cervejas = estoque.listarCervejas();
 
         return new Cervejas(cervejas);
     }
@@ -99,13 +103,6 @@ public class CervejaService {
         is.close();
 
         return Response.ok(dados).type("image/jpg").build();
-    }
-
-    private static Map<String, String> EXTENSOES;
-
-    static {
-        EXTENSOES = new HashMap<>();
-        EXTENSOES.put("image/jpg", ".jpg");
     }
 
     @POST

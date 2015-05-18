@@ -1,4 +1,4 @@
-package br.com.geladaonline.model.rest;
+package br.grupointegrado.geladaonline.model.rest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import br.com.geladaonline.model.Cerveja;
+import br.grupointegrado.geladaonline.model.Cerveja;
 
 /**
  * Representa uma coleção de cervejas

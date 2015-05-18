@@ -1,4 +1,4 @@
-package br.com.geladaonline.servlets;
+package br.grupointegrado.geladaonline.servlets;
 
 public class RecursoSemIdentificadorException extends Exception {
 

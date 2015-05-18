@@ -1,4 +1,4 @@
-package br.com.geladaonline.model;
+package br.grupointegrado.geladaonline.model;
 
 public class CervejaNaoEncontradaException extends RuntimeException {
 
