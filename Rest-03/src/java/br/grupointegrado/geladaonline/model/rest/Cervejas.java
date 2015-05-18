@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import br.grupointegrado.geladaonline.model.Cerveja;
 
 /**
- * Classe que representa uma coleção de Cervejas
+ * Representa uma coleção de Cervejas
  */
 @XmlRootElement
 public class Cervejas {

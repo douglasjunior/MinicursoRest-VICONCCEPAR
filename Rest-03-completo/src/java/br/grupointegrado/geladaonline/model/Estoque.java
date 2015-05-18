@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Classe responsável por gerenciar a coleção de Cervejas
+ */
 public class Estoque {
 
     private Map<String, Cerveja> cervejas = new HashMap<>();
@@ -12,10 +15,10 @@ public class Estoque {
     public Estoque() {
         Cerveja primeiraCerveja = new Cerveja("Stella Artois",
                 "A cerveja belga mais francesa do mundo :)", "Artois",
-                Cerveja.Tipo.LAGER);
+                Tipo.LAGER);
         Cerveja segundaCerveja = new Cerveja("Erdinger Weissbier",
                 "Cerveja de trigo alemã", "Erdinger Weissbräu",
-                Cerveja.Tipo.WEIZEN);
+                Tipo.WEIZEN);
         this.cervejas.put("Stella Artois", primeiraCerveja);
         this.cervejas.put("Erdinger Weissbier", segundaCerveja);
     }

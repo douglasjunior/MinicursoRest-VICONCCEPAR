@@ -29,6 +29,9 @@ import br.grupointegrado.geladaonline.model.CervejaJaExisteException;
 import br.grupointegrado.geladaonline.model.Estoque;
 import br.grupointegrado.geladaonline.model.rest.Cervejas;
 
+/**
+ * Classe responsável por receber as requisições REST na URL /cervejas
+ */
 @Path("/cervejas")
 @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 @Produces({MediaType.TEXT_XML, MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
